@@ -1,0 +1,15 @@
+{
+    "sheep": [
+        {
+            "id": "1234",
+            "name": "Dolly Two",
+            "url": "http://mike.kz/sheep1234",
+            "assets": {
+                "small_image": "http://cloned.sheep.com/ASSETS/small.jpg",
+                "large_image": "http://cloned.sheep.com/ASSETS/large.jpg"
+            }
+        }
+    ]
+}
+
+
