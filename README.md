@@ -41,8 +41,8 @@ A very simple and easy to use MOCK API server that serves static JSON written in
 
 Which supports calls like...
 
-    http://localhost:4567/sheep
-    http://localhost:4567/sheep/create
+    http://localhost:4321/sheep
+    http://localhost:4321/sheep/create
     
 And gives responses from the static result.json file like...
 
