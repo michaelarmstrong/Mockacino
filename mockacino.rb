@@ -43,6 +43,7 @@ class MockacinoConfig
     @post_path = 'POST'
     @assets_path = 'ASSETS'
     @index_file = 'return.json'
+    @config_file = 'config.conf'
     @port_number = 4321
     @listen_address = '0.0.0.0' 
 
@@ -64,6 +65,10 @@ class MockacinoConfig
 
    def self.index_file
      return @index_file
+   end
+
+   def self.config_file
+     return @config_file
    end
 
    def self.port_number
@@ -95,6 +100,12 @@ end
 post '/:token*' do
   path = params[:token]
   extension = params[:splat].first
+  
+  filePath = File.join(MockacinoConfig.site_root, MockacinoConfig.post_path, path, extension, MockacinoConfig.config_file)
+  if File.exist?(filePath)
+      configHash = Hash[*File.read(filePath).split(/[, \n]+/)]
+      status configHash["status"]
+  end
 
   puts "It was a POST request, routing to #{MockacinoConfig.site_root}/#{MockacinoConfig.post_path}/#{path}#{extension}/#{MockacinoConfig.index_file}"
   File.read(File.join(MockacinoConfig.site_root, MockacinoConfig.post_path, path, extension, MockacinoConfig.index_file))
@@ -103,6 +114,12 @@ end
 get '/:token*' do
   path = params[:token]   
   extension = params[:splat].first
+  
+  filePath = File.join(MockacinoConfig.site_root, MockacinoConfig.get_path, path, extension, MockacinoConfig.config_file)
+  if File.exist?(filePath)
+      configHash = Hash[*File.read(filePath).split(/[, \n]+/)]
+      status configHash["status"]
+  end
 
   puts "It was a GET request, routing to #{MockacinoConfig.site_root}/#{MockacinoConfig.get_path}/#{path}#{extension}/#{MockacinoConfig.index_file}"
   File.read(File.join(MockacinoConfig.site_root, MockacinoConfig.get_path, path, extension, MockacinoConfig.index_file))
