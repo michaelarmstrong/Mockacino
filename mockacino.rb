@@ -81,6 +81,10 @@ end
 set :port, MockacinoConfig.port_number
 set :bind, MockacinoConfig.listen_address
 
+before do
+    content_type 'application/json'
+end
+
 get '/' do
   puts "It was a {#request.request_method} request, serving #{@site_root}/#{@get_path}/#{@index_file}"
   File.read(File.join(@site_root, @get_path, @index_file))
